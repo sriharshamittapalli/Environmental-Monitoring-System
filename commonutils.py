@@ -5,6 +5,8 @@ import streamlit as st
 
 def page_styles(page_title, layout, initial_sidebar_state): return st.set_page_config(page_title = page_title, layout = layout, initial_sidebar_state = initial_sidebar_state)
 
+def sidebar_component(image): return st.sidebar.image(image)
+
 def get_data(url):
     response = requests.get(url)
     if response.status_code == 200: return response.json()
