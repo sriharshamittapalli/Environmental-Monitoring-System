@@ -5,7 +5,6 @@ import requests
 from commonutils import *
 
 # Define a function to fetch the latest data from ThingSpeak
-@st.cache(ttl=60) # cache the function for 60 seconds
 def get_latest_data():
     url = "https://api.thingspeak.com/channels/2085717/feeds.json"
     response = requests.get(url)
@@ -37,7 +36,9 @@ air_quality_graph, smoke_graph= air_quality_smoke_graph_tab.columns(2)
 air_quality_graph = air_quality_graph.empty()
 smoke_graph = smoke_graph.empty()
 
-def update_data():    
+smoke_detected = st.sidebar.empty()
+
+def update_data():
     # Get the latest data from ThingSpeak
     data_csv = get_latest_data()
     if not data_csv.empty:
@@ -48,10 +49,19 @@ def update_data():
             with air_quality_graph: graph_component(data_csv[["created_at", "field3"]].copy(deep=True),"field3","Air Quality")
             with smoke_graph: graph_component(data_csv[["created_at", "field4"]].copy(deep=True),"field4","Smoke")
         # Update the temperature, humidity, air quality, and smoke placeholders
-        temperature_tile.metric("Temperature (C)", data_csv["field1"].iloc[-1])
-        humidity_tile.metric("Humidity (%)", data_csv["field2"].iloc[-1])
-        air_quality_tile.metric("Air Quality", data_csv["field3"].iloc[-1])
-        smoke_tile.metric("Smoke", data_csv["field4"].iloc[-1])
+        temperature_tile.metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °C")
+        humidity_tile.metric("Humidity (%)", data_csv["field2"].iloc[-1] + " %")
+        air_quality_tile.metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
+        smoke_tile.metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
+
+        if int(data_csv["field4"].iloc[-1]) > 400:
+            smoke_detected.empty()
+            time.sleep(1)
+            smoke_detected.write("Smoke Detected")
+        else:
+            smoke_detected.empty()
+            time.sleep(1)
+            smoke_detected.write("No Smoke Detected")
 
 # Run the main streamlit app loop
 while True:
