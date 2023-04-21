@@ -36,7 +36,7 @@ air_quality_graph, smoke_graph= air_quality_smoke_graph_tab.columns(2)
 air_quality_graph = air_quality_graph.empty()
 smoke_graph = smoke_graph.empty()
 
-smoke_detected = st.sidebar.empty()
+# smoke_detected = st.sidebar.empty()
 
 def update_data():
     # Get the latest data from ThingSpeak
@@ -54,14 +54,14 @@ def update_data():
         air_quality_tile.metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
         smoke_tile.metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
 
-        if int(data_csv["field4"].iloc[-1]) > 400:
-            smoke_detected.empty()
-            time.sleep(1)
-            smoke_detected.write("Smoke Detected")
-        else:
-            smoke_detected.empty()
-            time.sleep(1)
-            smoke_detected.write("No Smoke Detected")
+#         if int(data_csv["field4"].iloc[-1]) > 400:
+#             smoke_detected.empty()
+#             time.sleep(1)
+#             smoke_detected.write("Smoke Detected")
+#         else:
+#             smoke_detected.empty()
+#             time.sleep(1)
+#             smoke_detected.write("No Smoke Detected")
 
 # Run the main streamlit app loop
 while True:
