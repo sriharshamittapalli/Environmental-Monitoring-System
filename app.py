@@ -14,7 +14,7 @@ def get_latest_data():
     else:
         return pd.DataFrame()
 
-st.set_page_config(page_title='Environmental Monitoring System', layout='wide', initial_sidebar_state="auto")
+page_styles(page_title = 'Environmental Monitoring System', layout = 'wide', initial_sidebar_state = 'auto')
 
 with st.sidebar: st.image("CSU.jpg")
 
