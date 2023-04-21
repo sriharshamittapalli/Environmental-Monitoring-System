@@ -16,7 +16,7 @@ def get_latest_data():
 
 st.set_page_config(page_title='Environmental Monitoring System', layout='wide', initial_sidebar_state="auto")
 
-# with st.sidebar: st.image("CSU.png")
+with st.sidebar: st.image("CSU.png")
 
 temperature_tile, humidity_tile, air_quality_tile, smoke_tile = st.columns(4)
 temperature_tile = temperature_tile.empty()
