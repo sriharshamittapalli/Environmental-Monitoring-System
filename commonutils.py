@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 import streamlit as st
 
-def page_styles(page_title, layout, initial_sidebar_state): return st.set_page_config(page_title = page_title, layout = layout, initial_sidebar_state = initial_sidebar_state)
+def title_component(page_title, layout, initial_sidebar_state): return st.set_page_config(page_title = page_title, layout = layout, initial_sidebar_state = initial_sidebar_state)
 
 def sidebar_component(image): return st.sidebar.image(image)
 
