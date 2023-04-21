@@ -4,16 +4,6 @@ import time
 import requests
 from commonutils import *
 
-# Define a function to fetch the latest data from ThingSpeak
-def get_latest_data():
-    url = "https://api.thingspeak.com/channels/2085717/feeds.json"
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-        return pd.DataFrame(data["feeds"])
-    else:
-        return pd.DataFrame()
-
 title_component(page_title = 'Environmental Monitoring System', layout = 'wide', initial_sidebar_state = 'auto')
 
 sidebar_component(image = 'CSU.jpg')
