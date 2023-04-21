@@ -66,4 +66,4 @@ def update_data():
 # Run the main streamlit app loop
 while True:
     update_data()
-    time.sleep(15)
+    time.sleep(30)
