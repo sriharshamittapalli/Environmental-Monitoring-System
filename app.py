@@ -14,9 +14,9 @@ def get_latest_data():
     else:
         return pd.DataFrame()
 
-page_styles(page_title = 'Environmental Monitoring System', layout = 'wide', initial_sidebar_state = 'auto')
+title_component(page_title = 'Environmental Monitoring System', layout = 'wide', initial_sidebar_state = 'auto')
 
-with st.sidebar: st.image("CSU.jpg")
+sidebar_component(image = 'CSU.jpg')
 
 temperature_tile, humidity_tile, air_quality_tile, smoke_tile = st.columns(4)
 temperature_tile = temperature_tile.empty()
