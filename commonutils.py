@@ -7,6 +7,16 @@ def title_component(page_title, layout, initial_sidebar_state): return st.set_pa
 
 def sidebar_component(image): return st.sidebar.image(image)
 
+# Define a function to fetch the latest data from ThingSpeak
+def get_latest_data():
+    url = "https://api.thingspeak.com/channels/2085717/feeds.json"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return pd.DataFrame(data["feeds"])
+    else:
+        return pd.DataFrame()
+
 def get_data(url):
     response = requests.get(url)
     if response.status_code == 200: return response.json()
