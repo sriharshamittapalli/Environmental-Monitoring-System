@@ -23,13 +23,6 @@ def get_latest_data():
     else:
         return pd.DataFrame()
 
-def get_data(url):
-    response = requests.get(url)
-    if response.status_code == 200: return response.json()
-    else: return None
-
-def get_feeds_data(data): return pd.DataFrame(data["feeds"])
-
 def graph_component(data,type,title):
     data["Date"] = pd.to_datetime(data["created_at"])
     data[title] = data[type].astype(float)
