@@ -15,7 +15,7 @@ def tile_components(tile_component_list):
 
 # Define a function to fetch the latest data from ThingSpeak
 def get_latest_data():
-    url = "https://api.thingspeak.com/channels/2085717/feeds.json"
+    url = "https://api.thingspeak.com/channels/2097821/feeds.json"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
