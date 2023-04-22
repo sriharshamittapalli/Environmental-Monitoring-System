@@ -1,12 +1,12 @@
-import streamlit as st
-import time
-from commonutils import *
+import streamlit as st # This is the main library, referred from https://streamlit.io/
+import time # This is used for delay
+from commonutils import * # Created all important functions in commonutils which helps in re-using functions and code readaility
 
-title_component(page_title = 'EMS Anytime', layout = 'wide', initial_sidebar_state = 'auto')
+title_component(page_title = 'EMS Anytime', layout = 'wide', initial_sidebar_state = 'auto') # Created title component function in commonutils
 
-sidebar_component()
+sidebar_component() # Created sidebar component in commonutils
 
-tile_component = tile_components(['temperature_tile', 'humidity_tile', 'air_quality_tile', 'smoke_tile'])
+tile_component = tile_components(['temperature_tile', 'humidity_tile', 'air_quality_tile', 'smoke_tile']) # Created tiles in commonutils
 
 temperature_humidity_graph_tab,air_quality_smoke_graph_tab = st.tabs(["Temperature and Humidity","Air Quality and Smoke / Gas"])
 temperature_humidity_graph_tab = temperature_humidity_graph_tab.empty()
