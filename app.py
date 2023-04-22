@@ -26,17 +26,17 @@ def update_data():
     # Get the latest data from ThingSpeak
     data_csv = get_latest_data()
     if not data_csv.empty:
+        tile_component[0].metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °F")
+        tile_component[1].metric("Humidity (%)", data_csv["field2"].iloc[-1] + " %")
+        tile_component[2].metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
+        tile_component[3].metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
         with temperature_humidity_graph_tab:
             with temperature_graph: graph_component(data_csv[["created_at", "field1"]].copy(deep=True),"field1","Temperature")
             with humidity_graph: graph_component(data_csv[["created_at", "field2"]].copy(deep=True),"field2","Humidity")
         with air_quality_smoke_graph_tab:
             with air_quality_graph: graph_component(data_csv[["created_at", "field3"]].copy(deep=True),"field3","Air Quality")
             with smoke_graph: graph_component(data_csv[["created_at", "field4"]].copy(deep=True),"field4","Smoke")
-        # Update the temperature, humidity, air quality, and smoke placeholders
-        tile_component[0].metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °F")
-        tile_component[1].metric("Humidity (%)", data_csv["field2"].iloc[-1] + " %")
-        tile_component[2].metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
-        tile_component[3].metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
+        
 
 # Run the main streamlit app loop
 while True:
