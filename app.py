@@ -1,7 +1,5 @@
 import streamlit as st
-import pandas as pd
 import time
-import requests
 from commonutils import *
 
 title_component(page_title = 'Environmental Monitoring System', layout = 'wide', initial_sidebar_state = 'auto')
