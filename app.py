@@ -2,7 +2,7 @@ import streamlit as st
 import time
 from commonutils import *
 
-title_component(page_title = 'Environmental Monitoring System', layout = 'wide', initial_sidebar_state = 'auto')
+title_component(page_title = 'EMS Anytime', layout = 'wide', initial_sidebar_state = 'auto')
 
 sidebar_component(image = 'CSU.jpg')
 
