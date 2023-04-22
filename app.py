@@ -20,8 +20,6 @@ air_quality_graph, smoke_graph= air_quality_smoke_graph_tab.columns(2)
 air_quality_graph = air_quality_graph.empty()
 smoke_graph = smoke_graph.empty()
 
-# smoke_detected = st.sidebar.empty()
-
 def update_data():
     # Get the latest data from ThingSpeak
     data_csv = get_latest_data()
