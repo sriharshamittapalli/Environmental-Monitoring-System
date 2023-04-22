@@ -5,7 +5,9 @@ import streamlit as st
 
 def title_component(page_title, layout, initial_sidebar_state): return st.set_page_config(page_title = page_title, layout = layout, initial_sidebar_state = initial_sidebar_state)
 
-def sidebar_component(image): return st.sidebar.image(image)
+def sidebar_component(): 
+    st.sidebar.title('Environmental Monitoring System')
+    return
 
 def tile_components(tile_component_list):
     tile_component_list[0],tile_component_list[1],tile_component_list[2],tile_component_list[3] = st.columns(4)
