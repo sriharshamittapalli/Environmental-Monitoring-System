@@ -1,5 +1,5 @@
 import streamlit as st # This is the main library, referred from https://streamlit.io/
-import time # This is used for delay
+import time # This is used for updating the application every 15 seconds.
 from commonutils import * # Created all important functions in commonutils which helps in re-using functions and code readaility
 
 title_component(page_title = 'EMS Anytime', layout = 'wide', initial_sidebar_state = 'auto') # Created title component function in commonutils
@@ -34,9 +34,7 @@ def update_data():
         with air_quality_smoke_graph_tab:
             with air_quality_graph: graph_component(data_csv[["created_at", "field3"]].copy(deep=True),"field3","Air Quality")
             with smoke_graph: graph_component(data_csv[["created_at", "field4"]].copy(deep=True),"field4","Smoke")
-        
 
-# Run the main streamlit app loop
 while True:
-    update_data()
-    time.sleep(15)
+    update_data() # Get the latest data from thingspeak server.
+    time.sleep(15) # Update the application every 15 seconds. Referred from https://www.pythoncentral.io/how-to-add-time-delay-in-your-python-code/
