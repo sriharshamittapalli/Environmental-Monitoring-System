@@ -8,9 +8,8 @@ def title_component(page_title, layout, initial_sidebar_state): return st.set_pa
 def sidebar_component(image): return st.sidebar.image(image)
 
 def tile_components(tile_component_list):
-    tile_component_list[0], tile_component_list[1], tile_component_list[2], tile_component_list[3] = st.columns(4)
-    tile_component_list[0] = tile_component_list[0].empty(); tile_component_list[1] = tile_component_list[1].empty(); tile_component_list[2] = tile_component_list[2].empty(); tile_component_list[3] = tile_component_list[3].empty()
-    return tile_component_list[0], tile_component_list[1], tile_component_list[2], tile_component_list[3]
+    tile_component_list[0],tile_component_list[1],tile_component_list[2],tile_component_list[3] = st.columns(4)
+    return tile_component_list[0].empty(), tile_component_list[1].empty(), tile_component_list[2].empty(), tile_component_list[3].empty()
 
 # Define a function to fetch the latest data from ThingSpeak
 def get_latest_data():
