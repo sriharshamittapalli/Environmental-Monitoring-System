@@ -60,4 +60,4 @@ def graph_component(data,type,title):
 
     chart = line + points
 
-    st.altair_chart(chart,theme="streamlit")
+    st.altair_chart(chart,theme="streamlit",use_container_width=True)
