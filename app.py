@@ -33,7 +33,7 @@ def update_data():
             with air_quality_graph: graph_component(data_csv[["created_at", "field3"]].copy(deep=True),"field3","Air Quality")
             with smoke_graph: graph_component(data_csv[["created_at", "field4"]].copy(deep=True),"field4","Smoke")
         # Update the temperature, humidity, air quality, and smoke placeholders
-        tile_component[0].metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °C")
+        tile_component[0].metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °F")
         tile_component[1].metric("Humidity (%)", data_csv["field2"].iloc[-1] + " %")
         tile_component[2].metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
         tile_component[3].metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
