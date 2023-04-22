@@ -6,11 +6,7 @@ title_component(page_title = 'Environmental Monitoring System', layout = 'wide',
 
 sidebar_component(image = 'CSU.jpg')
 
-temperature_tile, humidity_tile, air_quality_tile, smoke_tile = st.columns(4)
-temperature_tile = temperature_tile.empty()
-humidity_tile = humidity_tile.empty()
-air_quality_tile = air_quality_tile.empty()
-smoke_tile = smoke_tile.empty()
+tile_component = tile_components(['temperature_tile', 'humidity_tile', 'air_quality_tile', 'smoke_tile'])
 
 temperature_humidity_graph_tab,air_quality_smoke_graph_tab = st.tabs(["Temperature and Humidity","Air Quality and Smoke / Gas"])
 temperature_humidity_graph_tab = temperature_humidity_graph_tab.empty()
@@ -37,10 +33,10 @@ def update_data():
             with air_quality_graph: graph_component(data_csv[["created_at", "field3"]].copy(deep=True),"field3","Air Quality")
             with smoke_graph: graph_component(data_csv[["created_at", "field4"]].copy(deep=True),"field4","Smoke")
         # Update the temperature, humidity, air quality, and smoke placeholders
-        temperature_tile.metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °C")
-        humidity_tile.metric("Humidity (%)", data_csv["field2"].iloc[-1] + " %")
-        air_quality_tile.metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
-        smoke_tile.metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
+        tile_component[0].metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °C")
+        tile_component[1].metric("Humidity (%)", data_csv["field2"].iloc[-1] + " %")
+        tile_component[2].metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
+        tile_component[3].metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
 
 # Run the main streamlit app loop
 while True:
