@@ -4,7 +4,7 @@ from commonutils import *
 
 title_component(page_title = 'EMS Anytime', layout = 'wide', initial_sidebar_state = 'auto')
 
-sidebar_component(image = 'CSU.jpg')
+sidebar_component()
 
 tile_component = tile_components(['temperature_tile', 'humidity_tile', 'air_quality_tile', 'smoke_tile'])
 
