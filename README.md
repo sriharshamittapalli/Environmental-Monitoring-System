@@ -1,6 +1,6 @@
 # Environmental-Monitoring-System
 
-Repository for a CIS 554 project from Cleveland State University.
+This Repository is for a CIS 554 project from Cleveland State University.
 
 Course : Data Comm Net
 
