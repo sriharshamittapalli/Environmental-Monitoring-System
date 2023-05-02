@@ -10,4 +10,4 @@ The following is the application link:
 
 https://ems-anytime.streamlit.app/
 
-![image](https://user-images.githubusercontent.com/53350799/234112315-426b2a31-280f-4a3d-9899-0c51b58e54e0.png)
+![Screenshot (41)](https://user-images.githubusercontent.com/53350799/235555532-a00772c3-ba97-470b-abd2-307a20a90a2e.png)
