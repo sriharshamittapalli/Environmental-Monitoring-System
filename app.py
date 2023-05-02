@@ -28,7 +28,7 @@ smoke_graph = smoke_graph.empty()
 
 tooltip_information = st.sidebar.empty()
 
-download_dataset_button = st.sidebar.empty()
+test_tooltip_information = st.sidebar.empty()
 
 def update_data():
     # Get the latest data from ThingSpeak
@@ -46,13 +46,9 @@ def update_data():
             with air_quality_graph: graph_component(data_csv[["created_at", "field3"]].copy(deep=True),"field3","Air Quality")
             with smoke_graph: graph_component(data_csv[["created_at", "field4"]].copy(deep=True),"field4","Smoke")
         if int(float(data_csv["field4"].iloc[-1])) > 400: smoke_detected_component.warning(datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1]).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('US/Eastern')).strftime("Smoke detected at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="⚠️")
-        tooltip_information.write("Click on the option below to download the data, which will redirect you to ThingSpeak. Then click the **Export recent data** button to download the dataset.")
-        if download_dataset_button.button("Download Dataset", on_click=open_support_ticket, key=button_key): st.experimental_rerun()
-
-counter = 0
+        tooltip_information.write("Click on the hyperlink below to download the data, which will redirect you to ThingSpeak. Then click the Export recent data button to download the dataset.")
+        test_tooltip_information.write("[Download Dataset](https://thingspeak.com/channels/2097821)")
 
 while True:
-    counter += 1
-    button_key = f"button_{counter}"
     update_data() # Get the latest data from thingspeak server.
     time.sleep(15) # Update the application every 15 seconds. Referred from https://www.pythoncentral.io/how-to-add-time-delay-in-your-python-code/
