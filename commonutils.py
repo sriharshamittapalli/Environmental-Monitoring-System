@@ -2,10 +2,14 @@ import altair as alt
 import pandas as pd
 import requests
 import streamlit as st
+import webbrowser
 
 def title_component(page_title, layout, initial_sidebar_state): return st.set_page_config(page_title = page_title, layout = layout, initial_sidebar_state = initial_sidebar_state)
 
-def sidebar_component(): 
+def open_support_ticket(): webbrowser.open("https://thingspeak.com/channels/2085717")
+
+def sidebar_component():
+    st.sidebar.image('CSU.png')
     st.sidebar.title('Environmental Monitoring System')
     return
 
