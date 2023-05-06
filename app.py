@@ -1,54 +1,58 @@
-import streamlit as st # This is the main library, referred from https://streamlit.io/
-import time # This is used for updating the application every 15 seconds.
-from commonutils import * # Created all important functions in commonutils which helps in re-using functions and code readaility
-from datetime import datetime
-import pytz
+import time # This is used for updating the application every 15 seconds. Mainly used for delay, referred from https://docs.python.org/3/library/time.html
+from commonutils import * # Created all important functions in commonutils which helps in re-using functions and code readability
 
-title_component(page_title = 'EMS Anytime', layout = 'wide', initial_sidebar_state = 'auto') # Created title component function in commonutils
+# Implemented the title_component function in commonutils.py file.
+# In the title_component, we are displaying EMS Anytime as title of the page.
+# Setting layout as wide such that UI looks good.
+# Showing sidebar as default whenever we open the application.
+title_component(title_of_page = "EMS Anytime",
+                layout_of_page = "wide",
+                sidebar_state = "auto"
+                )
 
-sidebar_component() # Created sidebar component in commonutils
+# Implemented the sidebar_component function in commonutils.py file.
+# In the sidebar_component, we are displaying CSU logo. downloaded from https://www.csuohio.edu/marketing/logos
+# Displaying the title in sidebar as "Environmental Monitoring System".
+# Displaying the information about how to download the data from ThingSpeak.
+# Showing a hyperlink which redirects to ThingSpeak where we can download the data. https://thingspeak.com/channels/2097821
+sidebar_component(csu_image = "CSU.png",
+                  project_title = "Environmental Monitoring System",
+                  download_dataset_text = "Click on the hyperlink below to download the data, which will redirect you to ThingSpeak. Then click the Export recent data button to download the dataset.",
+                  download_dataset_hyperlink = "[Download Dataset](https://thingspeak.com/channels/2097821)"
+                  )
 
-last_update_component,smoke_detected_component = st.columns(2)
-smoke_detected_component = smoke_detected_component.empty()
-last_update_component = last_update_component.empty()
+messages_list = []
+messages_list.append("last_update_component")
+messages_list.append("smoke_detected_component")
+message_component_data = message_component(messages_list) # Implemented the message_components function in commonutils.py file.
 
-tile_component = tile_components(['temperature_tile', 'humidity_tile', 'air_quality_tile', 'smoke_tile']) # Created tiles in commonutils
+tiles_list = []
+tiles_list.append("temperature_tile")
+tiles_list.append("humidity_tile")
+tiles_list.append("air_quality_tile")
+tiles_list.append("smoke_tile")
+tile_component_data = tile_component(tiles_list) # Implemented the tile_components function in commonutils.py file.
 
-temperature_humidity_graph_tab,air_quality_smoke_graph_tab = st.tabs(["Temperature and Humidity","Air Quality and Smoke / Gas"])
-temperature_humidity_graph_tab = temperature_humidity_graph_tab.empty()
-air_quality_smoke_graph_tab = air_quality_smoke_graph_tab.empty()
+tabs_list = []
+tabs_list.append("Temperature and Humidity")
+tabs_list.append("Air Quality and Smoke / Gas")
+tabs_component_data = tabs_component(tabs_list) # Implemented the tabs_components function in commonutils.py file.
 
-temperature_graph, humidity_graph= temperature_humidity_graph_tab.columns(2)
-temperature_graph = temperature_graph.empty()
-humidity_graph = humidity_graph.empty()
+tab1_graphs_list = []
+tab1_graphs_list.append("temperature_graph")
+tab1_graphs_list.append("humidity_graph")
+tab1_graph_component = graph_component(tab1_graphs_list, tabs_component_data[0]) # Implemented the graph_components function in commonutils.py file.
 
-air_quality_graph, smoke_graph= air_quality_smoke_graph_tab.columns(2)
-air_quality_graph = air_quality_graph.empty()
-smoke_graph = smoke_graph.empty()
-
-tooltip_information = st.sidebar.empty()
-
-test_tooltip_information = st.sidebar.empty()
-
-def update_data():
-    # Get the latest data from ThingSpeak
-    data_csv = get_latest_data()
-    if not data_csv.empty:
-        last_update_component.info(datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1]).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('US/Eastern')).strftime("Last updated date at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="ℹ️")
-        tile_component[0].metric("Temperature (C)", data_csv["field1"].iloc[-1] + " °F")
-        tile_component[1].metric("Humidity (%)", data_csv["field2"].iloc[-1] + " %")
-        tile_component[2].metric("Air Quality", data_csv["field3"].iloc[-1] + " PPM")
-        tile_component[3].metric("Smoke", data_csv["field4"].iloc[-1] + " PPM")
-        with temperature_humidity_graph_tab:
-            with temperature_graph: graph_component(data_csv[["created_at", "field1"]].copy(deep=True),"field1","Temperature")
-            with humidity_graph: graph_component(data_csv[["created_at", "field2"]].copy(deep=True),"field2","Humidity")
-        with air_quality_smoke_graph_tab:
-            with air_quality_graph: graph_component(data_csv[["created_at", "field3"]].copy(deep=True),"field3","Air Quality")
-            with smoke_graph: graph_component(data_csv[["created_at", "field4"]].copy(deep=True),"field4","Smoke")
-        if int(float(data_csv["field4"].iloc[-1])) > 400: smoke_detected_component.warning(datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1]).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('US/Eastern')).strftime("Smoke detected at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="⚠️")
-        tooltip_information.write("Click on the hyperlink below to download the data, which will redirect you to ThingSpeak. Then click the Export recent data button to download the dataset.")
-        test_tooltip_information.write("[Download Dataset](https://thingspeak.com/channels/2097821)")
+tab2_graphs_list = []
+tab2_graphs_list.append("air_quality_graph")
+tab2_graphs_list.append("smoke_graph")
+tab2_graph_component = graph_component(tab2_graphs_list, tabs_component_data[1]) # Implemented the graph_components function in commonutils.py file.
 
 while True:
-    update_data() # Get the latest data from thingspeak server.
-    time.sleep(15) # Update the application every 15 seconds. Referred from https://www.pythoncentral.io/how-to-add-time-delay-in-your-python-code/
+    # Implemented the logic_component function in commonutils.py file.
+    logic_component(message_component_data,
+                   tile_component_data,
+                   tabs_component_data,
+                   tab1_graph_component,
+                   tab2_graph_component) 
+    time.sleep(15) # Utilized the sleep function from time package. Updating the application every 15 seconds.
