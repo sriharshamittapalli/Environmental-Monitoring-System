@@ -15,50 +15,6 @@ def columns(number, tab = False):
         return tab.columns(number)
     return st.columns(number)
 
-def title_component(title_of_page, layout_of_page, sidebar_state):
-    # using the set_page_config function from streamlit library.
-    st.set_page_config(page_title = title_of_page,
-                       layout = layout_of_page,
-                       initial_sidebar_state = sidebar_state)
-    return
-
-def sidebar_component(csu_image, project_title, download_dataset_text, download_dataset_hyperlink):
-    # using the image function from streamlit library.
-    st.sidebar.image(csu_image)
-    # using the title function from streamlit library.
-    st.sidebar.title(project_title)
-    # using the write function from streamlit library.
-    st.sidebar.write(download_dataset_text)
-    st.sidebar.write(download_dataset_hyperlink)
-    return
-
-def message_component(messages_list):
-    messages_list[0], messages_list[1] = columns(len(messages_list))
-    messages_list[0] = empty(messages_list[0])
-    messages_list[1] = empty(messages_list[1])
-    return messages_list[0], messages_list[1]
-
-def tile_component(tiles_list):
-    tiles_list[0],tiles_list[1],tiles_list[2],tiles_list[3] = columns(len(tiles_list))
-    tiles_list[0] = empty(tiles_list[0])
-    tiles_list[1] = empty(tiles_list[1])
-    tiles_list[2] = empty(tiles_list[2])
-    tiles_list[3] = empty(tiles_list[3])
-    return tiles_list[0], tiles_list[1], tiles_list[2], tiles_list[3]
-
-def tabs_component(tabs_list):
-    # using the tabs function from streamlit library.
-    tabs_list[0], tabs_list[1] = st.tabs(tabs_list)
-    tabs_list[0] = empty(tabs_list[0])
-    tabs_list[1] = empty(tabs_list[1])
-    return tabs_list[0], tabs_list[1]
-
-def graph_component(graphs_list, tab):
-    graphs_list[0], graphs_list[1] = columns(len(graphs_list), tab)
-    graphs_list[0] = empty(graphs_list[0])
-    graphs_list[1] = empty(graphs_list[1])
-    return graphs_list[0], graphs_list[1]
-
 def metric_component(label, value, tile):
     # using the metrics function from streamlit library.
     tile.metric(label, value)
