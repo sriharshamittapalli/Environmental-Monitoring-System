@@ -7,18 +7,16 @@ def empty(variable):
     return variable.empty()
 
 def columns(number, tab = False):
-    # using the columns function from streamlit library.
     if tab:
-        return tab.columns(number)
+        return tab.columns(number) # using the columns function from streamlit library.
     else:
-        return st.columns(number)
+        return st.columns(number) # using the columns function from streamlit library.
 
 # Define a function to fetch the latest data from ThingSpeak
 def get_latest_data():
     channel_feed = "https://api.thingspeak.com/channels/2097821/feeds.json"
-    # using the get function from requests library.
-    json_response = requests.get(channel_feed)
-    if json_response.status_code == 200:
-        return pd.DataFrame(json_response.json()["feeds"]) # using the dataframe function from requests library.
+    json_response = requests.get(channel_feed)  # using the get function from requests library.
+    if json_response.status_code == 200: # getting status as 200 means success.
+        return pd.DataFrame(json_response.json()["feeds"]) # using the DataFrame function from pandas library.
     else:
-        return pd.DataFrame()
+        return pd.DataFrame() # using the DataFrame function from pandas library.
