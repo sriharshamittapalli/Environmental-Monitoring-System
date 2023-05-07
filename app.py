@@ -22,7 +22,7 @@ titlecomponent.title_component(title_of_page = "EMS Anytime",
 # Displaying the title in sidebar as "Environmental Monitoring System".
 # Displaying the information about how to download the data from ThingSpeak.
 # Showing a hyperlink which redirects to ThingSpeak where we can download the data. https://thingspeak.com/channels/2097821
-sidebarcomponent.sidebar_component(csu_image = "CSU.png",
+sidebarcomponent.sidebar_component(csu_image = "images/CSU.png",
                   project_title = "Environmental Monitoring System",
                   download_dataset_text = "Click on the hyperlink below to download the data, which will redirect you to ThingSpeak. Then click the Export recent data button to download the dataset.",
                   download_dataset_hyperlink = "[Download Dataset](https://thingspeak.com/channels/2097821)"
