@@ -6,6 +6,7 @@ from components import messagecomponent
 from components import tilecomponent
 from components import tabscomponent
 from components import graphcomponent
+from components import logiccomponent
 
 # Implemented the title_component function in commonutils.py file.
 # In the title_component, we are displaying EMS Anytime as title of the page.
@@ -56,7 +57,7 @@ tab2_graph_component = graphcomponent.graph_component(tab2_graphs_list, tabs_com
 
 while True:
     # Implemented the logic_component function in commonutils.py file.
-    logic_component(message_component_data,
+    logiccomponent.logic_component(message_component_data,
                    tile_component_data,
                    tabs_component_data,
                    tab1_graph_component,
