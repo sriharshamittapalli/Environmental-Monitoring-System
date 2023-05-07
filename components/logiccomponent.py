@@ -8,7 +8,11 @@ def logic_component(message_component_data, tile_component_data, tabs_component_
     # Get the latest data from ThingSpeak
     data_csv = get_latest_data()
     if not data_csv.empty:
-        message_component_data[0].info(datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1]).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('US/Eastern')).strftime("Last updated date at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="ℹ️")
+        message_component_data[0].info(
+            datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1])
+            .replace(tzinfo = pytz.utc)
+            .astimezone(pytz.timezone('US/Eastern'))
+            .strftime("Last updated date at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="ℹ️")
         # Implemented the metric_component function in commonutils.py file.
         metriccomponent.metric_component("Temperature (C)",
                         data_csv["field1"].iloc[-1] + " °F",
@@ -40,4 +44,9 @@ def logic_component(message_component_data, tile_component_data, tabs_component_
                 linegraphcomponent.line_graph_component(data_csv[["created_at", "field4"]].copy(deep=True),
                                     "field4",
                                     "Smoke")
-        if int(float(data_csv["field4"].iloc[-1])) > 400: message_component_data[1].warning(datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1]).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('US/Eastern')).strftime("Smoke detected at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="⚠️")
+        if int(float(data_csv["field4"].iloc[-1])) > 400:
+            message_component_data[1].warning(
+                datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1])
+                .replace(tzinfo = pytz.utc)
+                .astimezone(pytz.timezone('US/Eastern'))
+                .strftime("Smoke detected at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="⚠️")
