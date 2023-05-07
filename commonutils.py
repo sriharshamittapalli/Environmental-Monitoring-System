@@ -1,6 +1,6 @@
-import altair as alt
-import pandas as pd
-import requests
+import altair as alt # This library used for graphs, referred from https://altair-viz.github.io/
+import pandas as pd # This library is used for data, referred from https://pandas.pydata.org/
+import requests # This library is used to get data from api, referred from https://pypi.org/project/requests/
 import streamlit as st # This is the main library, referred from https://streamlit.io/
 from datetime import datetime # This is used for timestamp conversions. referred from https://docs.python.org/3/library/datetime.html
 import pytz # This is used for timezone conversions. referred from https://pypi.org/project/pytz/
