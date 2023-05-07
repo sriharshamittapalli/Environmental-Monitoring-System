@@ -2,6 +2,8 @@
 
 This Repository is for a CIS 554 project from Cleveland State University.
 
+Major : Computer Science
+
 Course : Data Comm Net
 
 Instructor : Zicheng Chi
