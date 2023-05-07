@@ -5,6 +5,16 @@ import streamlit as st # This is the main library, referred from https://streaml
 from datetime import datetime # This is used for timestamp conversions. referred from https://docs.python.org/3/library/datetime.html
 import pytz # This is used for timezone conversions. referred from https://pypi.org/project/pytz/
 
+def empty(variable):
+    # using the empty function from streamlit library.
+    return variable.empty()
+
+def columns(number, tab = False):
+    # using the columns function from streamlit library.
+    if tab:
+        return tab.columns(number)
+    return st.columns(number)
+
 def title_component(title_of_page, layout_of_page, sidebar_state):
     # using the set_page_config function from streamlit library.
     st.set_page_config(page_title = title_of_page,
@@ -23,33 +33,30 @@ def sidebar_component(csu_image, project_title, download_dataset_text, download_
     return
 
 def message_component(messages_list):
-    # using the columns function from streamlit library.
-    messages_list[0], messages_list[1] = st.columns(len(messages_list))
-    messages_list[0] = messages_list[0].empty()
-    messages_list[1] = messages_list[1].empty()
+    messages_list[0], messages_list[1] = columns(len(messages_list))
+    messages_list[0] = empty(messages_list[0])
+    messages_list[1] = empty(messages_list[1])
     return messages_list[0], messages_list[1]
 
 def tile_component(tiles_list):
-    # using the columns function from streamlit library.
-    tiles_list[0],tiles_list[1],tiles_list[2],tiles_list[3] = st.columns(len(tiles_list))
-    tiles_list[0] = tiles_list[0].empty()
-    tiles_list[1] = tiles_list[1].empty()
-    tiles_list[2] = tiles_list[2].empty()
-    tiles_list[3] = tiles_list[3].empty()
+    tiles_list[0],tiles_list[1],tiles_list[2],tiles_list[3] = columns(len(tiles_list))
+    tiles_list[0] = empty(tiles_list[0])
+    tiles_list[1] = empty(tiles_list[1])
+    tiles_list[2] = empty(tiles_list[2])
+    tiles_list[3] = empty(tiles_list[3])
     return tiles_list[0], tiles_list[1], tiles_list[2], tiles_list[3]
 
 def tabs_component(tabs_list):
     # using the tabs function from streamlit library.
     tabs_list[0], tabs_list[1] = st.tabs(tabs_list)
-    tabs_list[0] = tabs_list[0].empty()
-    tabs_list[1] = tabs_list[1].empty()
+    tabs_list[0] = empty(tabs_list[0])
+    tabs_list[1] = empty(tabs_list[1])
     return tabs_list[0], tabs_list[1]
 
 def graph_component(graphs_list, tab):
-    # using the columns function from streamlit library.
-    graphs_list[0], graphs_list[1] = tab.columns(len(graphs_list))
-    graphs_list[0] = graphs_list[0].empty()
-    graphs_list[1] = graphs_list[1].empty()
+    graphs_list[0], graphs_list[1] = columns(len(graphs_list), tab)
+    graphs_list[0] = empty(graphs_list[0])
+    graphs_list[1] = empty(graphs_list[1])
     return graphs_list[0], graphs_list[1]
 
 def metric_component(label, value, tile):
@@ -58,11 +65,13 @@ def metric_component(label, value, tile):
 
 # Define a function to fetch the latest data from ThingSpeak
 def get_latest_data():
-    url = "https://api.thingspeak.com/channels/2097821/feeds.json"
+    channel_feed = "https://api.thingspeak.com/channels/2097821/feeds.json"
     # using the get function from requests library.
-    response = requests.get(url)
-    if response.status_code == 200: return pd.DataFrame(response.json()["feeds"]) # using the dataframe function from requests library.
-    else: return pd.DataFrame()
+    response = requests.get(channel_feed)
+    if response.status_code == 200:
+        return pd.DataFrame(response.json()["feeds"]) # using the dataframe function from requests library.
+    else:
+        return pd.DataFrame()
 
 def line_graph_component(data,type,title):
     data["Date"] = pd.to_datetime(data["created_at"])
