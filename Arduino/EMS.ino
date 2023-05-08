@@ -5,8 +5,8 @@
 DHT dhtTempAndHumidity(dhtDigitalPin, typeOfDhtSensor); // sending the required data to dht_temp_and_humidity class
 #define receiveDataPin 3
 #define transferDataPin 2
-const String username = "realme_X7_Max";
-const String password = "0987654321";
+const String username = "XXXXXXXXXXXXXX";
+const String password = "XXXXXXXXXXXX";
 const String apiKey = "TBOC7YZWU6WK2M5S";
 const String domainHost = "api.thingspeak.com";
 const String portNumber = "80";
