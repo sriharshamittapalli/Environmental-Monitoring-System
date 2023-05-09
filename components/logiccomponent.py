@@ -8,11 +8,12 @@ def logic_component(message_component_data, tile_component_data, tabs_component_
     # Get the latest data from ThingSpeak
     data_csv = get_latest_data()
     if not data_csv.empty:
+        # using info function from streamlit library
         message_component_data[0].info(
-            datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1])
-            .replace(tzinfo = pytz.utc)
-            .astimezone(pytz.timezone('US/Eastern'))
-            .strftime("Last updated date at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="ℹ️")
+            datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1]) # using fromisoformat function from datetime function
+            .replace(tzinfo = pytz.utc) # using replace function from datetime function
+            .astimezone(pytz.timezone('US/Eastern')) # using astimezone function from datetime function
+            .strftime("Last updated date at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="ℹ️") # using strftime function from datetime function
         # Implemented the metric_component function in commonutils.py file.
         metriccomponent.metric_component("Temperature (C)",
                         data_csv["field1"].iloc[-1] + " °F",
@@ -45,8 +46,9 @@ def logic_component(message_component_data, tile_component_data, tabs_component_
                                     "field4",
                                     "Smoke")
         if int(float(data_csv["field4"].iloc[-1])) > 400:
+            # using warning function from streamlit library
             message_component_data[1].warning(
-                datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1])
-                .replace(tzinfo = pytz.utc)
-                .astimezone(pytz.timezone('US/Eastern'))
-                .strftime("Smoke detected at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="⚠️")
+                datetime.fromisoformat(data_csv["created_at"].iloc[-1][:-1]) # using fromisoformat function from datetime function
+                .replace(tzinfo = pytz.utc) # using replace function from datetime function
+                .astimezone(pytz.timezone('US/Eastern')) # using astimezone function from datetime function
+                .strftime("Smoke detected at **%B %d, %Y** at **%I:%M:%S %p** EDT."), icon="⚠️") # using strftime function from datetime function
