@@ -15,7 +15,8 @@ def line_graph_component(data,type,title):
                         )
     line = (
            alt.Chart(data[["Date", title]]) # Using Chart function from altair library.
-           .mark_line(color = "blue") # Marking the line color as blue.
+           .mark_line(color = "blue") # Marking the line color as blue. Using mark_line function from altair library.
+            # Using the encode function from altair library.
            .encode(
                  alt.X(
                       "Date:T", # Formating date, also learned how to do these operations from https://altair-viz.github.io/
@@ -27,6 +28,7 @@ def line_graph_component(data,type,title):
                       scale = y_scale
                  ),
                  tooltip=["Date:T", title + ":Q"])
+            # Using the properties function from altair library.
            .properties(
                       title = title + " vs Time"
                       )
@@ -34,10 +36,12 @@ def line_graph_component(data,type,title):
     
     points = (
             alt.Chart(data[["Date", title]]) # Using Chart function from altair library.
+            # Using mark_point function from altair library.
             .mark_point(
                        color = "red", # Marking the points color as red
                        size = 30
                        )
+            # Using encode function from altair library.
             .encode(
                    alt.X(
                         "Date:T",
