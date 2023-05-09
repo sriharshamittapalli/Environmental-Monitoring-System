@@ -11,27 +11,22 @@ const String apiKey = "TBOC7YZWU6WK2M5S";
 const String domainHost = "api.thingspeak.com";
 const String portNumber = "80";
 
-int successCountOne;
-int successCountPeriod;
-boolean detected = false;
+int successCountOne; int successCountPeriod; boolean detected = false;
 
 SoftwareSerial esp8266WiFiModule(receiveDataPin,transferDataPin);
 
 void setup() {
   dhtTempAndHumidity.begin();
-  Serial.begin(9600); //baud rate
-  esp8266WiFiModule.begin(115200);
+  Serial.begin(9600); esp8266WiFiModule.begin(115200);
   // Learned how to connect to internet for ESP 8266 using AT commands, referred from https://electronics-fun.com/esp8266-at-commands/
-  forwardDataUsingAT("AT",1,"OK");
-  forwardDataUsingAT("AT+CWMODE=1",1,"OK"); // Switching to station mode to connect to the Wifi network
-  forwardDataUsingAT(String("AT+CWJAP='") + username + "','" + password + "'", 10, "OK");
+  forwardDataUsingAT("AT",1,"OK"); forwardDataUsingAT("AT+CWMODE=1",1,"OK"); forwardDataUsingAT(String("AT+CWJAP='") + username + "','" + password + "'", 10, "OK");
   delay(500); // Allowing a timeframe of 800 milliseconds to connect the module to the network
 }
 
 void loop() {
   float humidityValue = dhtTempAndHumidity.readHumidity(); // using readHumidity function from DHT library
   float temparatureValue = dhtTempAndHumidity.readTemperature(); // using readTemperature function from DHT library
-  float temparatureValueInF = (temparatureValue * 1.8) + 32;
+  float temparatureValueInF = (temparatureValue * 1.8) + 32; // converting temperature from celsuis to farenheit
   int airQualityValue = analogRead(A0); // Reading the input from the analog pin 0
   float gasValue = analogRead(A1); // Reading the input from the analog pin 1
   String getEnvironmentalData = "GET https://domainHost/update?api_key="+ apiKey +"&field1="+temparatureValueInF+"&field2="+humidityValue+"&field3="+airQualityValue+"&field4="+gasValue;
@@ -44,24 +39,14 @@ void loop() {
   forwardDataUsingAT("AT+CIPSEND=0," +String(getEnvironmentalData.length()+4),4,">");
   esp8266WiFiModule.println(getEnvironmentalData);
   delay(1500);
-  successCountOne = successCountOne+1;
+  successCountOne = successCountOne + 1;
   forwardDataUsingAT("AT+CIPCLOSE=0",5,"OK");
   delay(500);
 }
 
 void forwardDataUsingAT(String passedCommand, int maximumTime, char scanReplay[]) {
   Serial.print(successCountOne + ": The Given command -->  " + passedCommand + " ");
-  while(successCountPeriod < (maximumTime*1)){
-    esp8266WiFiModule.println(passedCommand);
-    if(esp8266WiFiModule.find(scanReplay)){
-      detected = true; break;
-    }
-    successCountPeriod++;
-  }
-  if(detected){
-    Serial.println("Connected Successfully"); successCountOne++; successCountPeriod = 0;
-  }else{
-    Serial.println("It got Failed"); successCountOne = 0; successCountPeriod = 0;
-  }
-  detected = false;
+  while(successCountPeriod < (maximumTime*1)){ esp8266WiFiModule.println(passedCommand); if(esp8266WiFiModule.find(scanReplay)){ detected = true; break; } successCountPeriod++; }
+  if(detected){ Serial.println("Connected Successfully"); successCountOne++; successCountPeriod = 0; }
+  else{ Serial.println("It got Failed"); successCountOne = 0; successCountPeriod = 0; } detected = false;
  }
