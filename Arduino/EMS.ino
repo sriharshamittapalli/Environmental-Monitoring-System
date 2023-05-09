@@ -16,11 +16,11 @@ int successCountOne; int successCountPeriod; boolean detected = false;
 SoftwareSerial esp8266WiFiModule(receiveDataPin,transferDataPin);
 
 void setup() {
-  dhtTempAndHumidity.begin();
-  Serial.begin(9600); esp8266WiFiModule.begin(115200);
+  dhtTempAndHumidity.begin(); // using the begin function from dht library and starting the sensor.
+  Serial.begin(9600); esp8266WiFiModule.begin(115200); // using the begin function from dht library, softwareserial and starting the sensor. giving the baud rate as well. 
   // Learned how to connect to internet for ESP 8266 using AT commands, referred from https://electronics-fun.com/esp8266-at-commands/
   forwardDataUsingAT("AT",1,"OK"); forwardDataUsingAT("AT+CWMODE=1",1,"OK"); forwardDataUsingAT(String("AT+CWJAP='") + username + "','" + password + "'", 10, "OK");
-  delay(500); // Allowing a timeframe of 800 milliseconds to connect the module to the network
+  delay(500); // Allowing a timeframe of 500 milliseconds to connect the module to the network
 }
 
 void loop() {
@@ -34,14 +34,12 @@ void loop() {
   Serial.print("Humidity =" + String(humidityValue) + "% ");
   Serial.print("Gas = " + String(gasValue) + " PPM ");
   // Learned how to connect to internet for ESP 8266 using AT commands, referred from https://electronics-fun.com/esp8266-at-commands/
-  forwardDataUsingAT("AT+CIPMUX=1",5,"OK");
-  forwardDataUsingAT("AT+CIPSTART=0,\"TCP\",\""+ domainHost +"\","+ portNumber,15,"OK");
-  forwardDataUsingAT("AT+CIPSEND=0," +String(getEnvironmentalData.length()+4),4,">");
+  forwardDataUsingAT("AT+CIPMUX=1",5,"OK"); forwardDataUsingAT("AT+CIPSTART=0,\"TCP\",\""+ domainHost +"\","+ portNumber,15,"OK"); forwardDataUsingAT("AT+CIPSEND=0," +String(getEnvironmentalData.length()+4),4,">");
   esp8266WiFiModule.println(getEnvironmentalData);
-  delay(1500);
+  delay(1500); // Allowing a timeframe of 1500 milliseconds for delay, we send the data to thingspeak every 15 seconds.
   successCountOne = successCountOne + 1;
   forwardDataUsingAT("AT+CIPCLOSE=0",5,"OK");
-  delay(500);
+  delay(500); // Allowing a timeframe of 500 milliseconds for delay
 }
 
 void forwardDataUsingAT(String passedCommand, int maximumTime, char scanReplay[]) {
