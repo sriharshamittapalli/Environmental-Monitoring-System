@@ -4,12 +4,14 @@
 #define dhtDigitalPin 7 // defining the pin number of dhtDigitalPin
 DHT dhtTempAndHumidity(dhtDigitalPin, typeOfDhtSensor); // sending the required data to dht_temp_and_humidity class
 #define receiveDataPin 3 // defining pin number of receiveDataPin for ESP 8266 Wi-Fi Module
+
 #define transferDataPin 2 // defining pin number of transferDataPin for ESP 8266 Wi-Fi Module
-const String username = "XXXXXXXXXXXXXX";
-const String password = "XXXXXXXXXXXX";
-const String apiKey = "TBOC7YZWU6WK2M5S";
-const String domainHost = "api.thingspeak.com";
-const String portNumber = "80";
+//below constant variables are used for establishing connection between ESP module and Arduino microcontroller
+const String username = "XXXXXXXXXXXXXX"; // storing the usernmae or SSID
+const String password = "XXXXXXXXXXXX"; // storing the password into a varibale named password
+const String apiKey = "TBOC7YZWU6WK2M5S"; // assignment of the API key to transmit the data to thingSpeak channel
+const String domainHost = "api.thingspeak.com"; // storing domain name of the thingSpeak to fetch the thingSpeak server
+const String portNumber = "80"; // port number 80 is by default accepted by the thingSpeak server to establish a successful connection.
 
 int successCountOne; int successCountPeriod; boolean detected = false;
 
