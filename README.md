@@ -6,6 +6,8 @@ Major : Computer Science
 
 Course : Data Comm Net
 
+Semester : Spring 2023
+
 Instructor : Zicheng Chi
 
 The following is the application link:
