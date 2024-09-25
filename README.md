@@ -44,3 +44,31 @@ The **Environmental Monitoring System** is an IoT-based project designed to meas
 
    ```bash
    pip install streamlit matplotlib requests
+
+## Usage
+
+1. Power on the system to begin monitoring environmental parameters.
+2. Access real-time data and visualizations through the Streamlit web application.
+3. View historical data from ThingSpeak.
+4. Receive alerts if any environmental parameter exceeds predefined thresholds.
+
+## Applications
+
+- **Agriculture**: Optimize crop growth conditions by monitoring soil moisture and climate factors.
+- **Indoor Air Quality**: Assess air quality in homes or offices to maintain a healthy environment.
+- **Industrial Safety**: Ensure safe working conditions by continuously tracking environmental parameters.
+
+## Contributing
+
+Contributions are welcome! If you would like to improve this project, you can:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes.
+4. Open a pull request and describe the changes you’ve made.
+
+If you encounter any issues or have suggestions, feel free to open an issue in the repository.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
