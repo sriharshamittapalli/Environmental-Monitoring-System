@@ -26,6 +26,21 @@ The **Environmental Monitoring System** is an IoT-based project designed to meas
 - **Streamlit**: Web application framework for interactive data visualization.
 - **ThingSpeak API**: Facilitates cloud storage and retrieval of environmental data.
 
+## Project Information
+
+This Repository is for a **CIS 554** project from **Cleveland State University**.
+
+- **Major**: Computer Science
+- **Course**: Data Communication Networks
+- **Semester**: Spring 2023
+- **Instructor**: Zicheng Chi
+
+The following is the application link:
+
+[Environmental Monitoring System Application](https://ems-anytime.streamlit.app/)
+
+![Screenshot (41)](https://user-images.githubusercontent.com/53350799/235555532-a00772c3-ba97-470b-abd2-307a20a90a2e.png)
+
 ## Installation
 
 ### Hardware Setup
